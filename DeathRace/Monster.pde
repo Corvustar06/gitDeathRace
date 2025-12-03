@@ -1,5 +1,5 @@
 class Monster {
-  PVector position = new PVector(width/2,height/2);
+  PVector position = new PVector(width/2, height/2);
   boolean collision=false;
   int direction=0;
   float velocity =2.5;
@@ -21,11 +21,7 @@ class Monster {
   }
 
   void move() {
-<<<<<<< HEAD
     int shouldChange = (int)random(1, 40);
-=======
-    int shouldChange = (int)random(1, 20);
->>>>>>> ghost-erratic-movement
     if (shouldChange==3) {
       direction = (int)random(0, 5);
     }

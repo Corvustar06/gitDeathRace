@@ -31,11 +31,7 @@ void draw() {
   //Draws a repeated pattern of tiled ground background
   for (int i =0; i<width+360; i+=360) {
     for (int j=0; j<height+360; j+=360) {
-<<<<<<< HEAD
       groundTile.resize(360, 360);//resizes the tiles to a more appropriate size
-=======
-      groundTile.resize(360,360);//resizes the tiles to a more appropriate size
->>>>>>> Background-not-overlapping
       image(groundTile, i, j);
     }
   }
@@ -69,13 +65,8 @@ void draw() {
     textSize(50);
     //Shows the player their score and what time they have left to earn more
     //points. nf fuction is for number formating, so that there are only 2 decimal places shown
-<<<<<<< HEAD
     text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2), 200, 100);
     if (timer<=0) {
-=======
-    text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
-    if(timer<=0){
->>>>>>> Background-not-overlapping
       playingGame=false;
       gameOver=true;
     }
@@ -162,5 +153,7 @@ void mousePressed() {
     playingGame=true;
     gHit=0;
     timer=60;
+    graves = new ArrayList<Gravestone>(0);
+    c.position = new PVector(width/2, 3*(height/4));
   }
 }
