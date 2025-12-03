@@ -8,6 +8,7 @@ boolean playingGame = true;
 boolean gameOver=false;
 ArrayList<Gravestone> graves = new ArrayList<Gravestone>(0);
 int gHit=0;
+float timer =60.0;
 
 void setup() {
   size(1080, 720);
@@ -21,6 +22,7 @@ void setup() {
   c= new Car();
   m1=new Monster();
   m2 = new Monster();
+  frameRate = 60;
 }
 
 void draw() {
@@ -44,7 +46,17 @@ void draw() {
         g.checkCollision(c);
       }
     }
+    
+    timer-=0.016;
+    fill(255);
+    textSize(50);
+    text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
+    if(timer<=0){
+      playingGame=false;
+      gameOver=true;
+    }
   }
+  
 }
 //Method to create dotted line boarded on either side of the screen
 void drawBoarders() {
