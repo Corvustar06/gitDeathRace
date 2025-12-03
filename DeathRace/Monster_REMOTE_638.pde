@@ -1,5 +1,5 @@
 class Monster {
-  PVector position = new PVector(width/2,height/2);
+  PVector position = new PVector(200, 200);
   boolean collision=false;
   int direction=0;
   float velocity =2.5;
@@ -16,35 +16,22 @@ class Monster {
       graves.add(new Gravestone(position.x, position.y));
       position = new PVector(random(0, 100), random(0, height));
       c.blocked=true;
-      gHit++;
     }
   }
 
   void move() {
-<<<<<<< HEAD
-    int shouldChange = (int)random(1, 40);
-=======
     int shouldChange = (int)random(1, 20);
->>>>>>> ghost-erratic-movement
     if (shouldChange==3) {
       direction = (int)random(0, 5);
     }
     if (direction==1) {
-      if (position.y-velocity>20) {
-        position.y-=velocity;
-      }
+      position.y-=velocity;
     } else if (direction==2) {
-      if (position.x+velocity<width-16) {
-        position.x+=velocity;
-      }
+      position.x+=velocity;
     } else if (direction==3) {
-      if (position.y+velocity<height-20) {
-        position.y+=velocity;
-      }
+      position.y+=velocity;
     } else if (direction==4) {
-      if (position.x-velocity>16) {
-        position.x-=velocity;
-      }
+      position.x-=velocity;
     }
   }
 }

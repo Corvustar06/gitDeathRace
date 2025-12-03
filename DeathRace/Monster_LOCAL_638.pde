@@ -21,11 +21,7 @@ class Monster {
   }
 
   void move() {
-<<<<<<< HEAD
     int shouldChange = (int)random(1, 40);
-=======
-    int shouldChange = (int)random(1, 20);
->>>>>>> ghost-erratic-movement
     if (shouldChange==3) {
       direction = (int)random(0, 5);
     }
