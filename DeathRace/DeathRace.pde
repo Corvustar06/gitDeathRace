@@ -63,6 +63,8 @@ void draw() {
     timer-=0.016;
     fill(255);
     textSize(50);
+    //Shows the player their score and what time they have left to earn more
+    //points. nf fuction is for number formating, so that there are only 2 decimal places shown
     text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
     if(timer<=0){
       playingGame=false;
