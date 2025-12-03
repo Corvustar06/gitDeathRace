@@ -20,9 +20,9 @@ class Monster {
   }
 
   void move() {
-    int shouldChange = (int)random(1, 3);
+    int shouldChange = (int)random(1, 20);
     if (shouldChange==3) {
-      direction = (int)random(1, 4);
+      direction = (int)random(0, 5);
     }
     if (direction==1) {
       position.y-=velocity;
