@@ -29,8 +29,8 @@ void setup() {
 
 void draw() {
   //Draws a repeated pattern of tiled ground background
-  for (int i =0; i<width; i+=360) {
-    for (int j=0; j<height; j+=360) {
+  for (int i =0; i<width+360; i+=360) {
+    for (int j=0; j<height+360; j+=360) {
       groundTile.resize(360,360);//resizes the tiles to a more appropriate size
       image(groundTile, i, j);
     }
