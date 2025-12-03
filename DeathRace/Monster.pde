@@ -1,5 +1,5 @@
 class Monster {
-  PVector position = new PVector(200, 200);
+  PVector position = new PVector(width/2,height/2);
   boolean collision=false;
   int direction=0;
   float velocity =2.5;

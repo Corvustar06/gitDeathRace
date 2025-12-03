@@ -1,11 +1,12 @@
 PImage car;
 PImage ghost;
 PImage groundTile;
+PImage refresh;
 Car c;
 Monster m1, m2;
-boolean newGame=true;
-boolean playingGame = true;
-boolean gameOver=false;
+boolean newGame=false;
+boolean playingGame = false;
+boolean gameOver=true;
 ArrayList<Gravestone> graves = new ArrayList<Gravestone>(0);
 int gHit=0;
 float timer =60.0;
@@ -19,6 +20,7 @@ void setup() {
   for (int i=0; i<100; i++) {
     groundTile = loadImage("dirt_pattern.jpg");
   }
+  refresh = loadImage("refresh.png");
   c= new Car();
   m1=new Monster();
   m2 = new Monster();
@@ -27,11 +29,22 @@ void setup() {
 
 void draw() {
   //Draws a repeated pattern of tiled ground background
-  for (int i =0; i<width; i+=108) {
-    for (int j=0; j<height; j+=72) {
-      groundTile.resize(108, 72);//resizes the tiles to a more appropriate size
+  for (int i =0; i<width; i+=360) {
+    for (int j=0; j<height; j+=360) {
+      groundTile.resize(360,360);//resizes the tiles to a more appropriate size
       image(groundTile, i, j);
     }
+  }
+  if(newGame==true){
+    fill(255);
+    stroke(200);
+    strokeWeight(5);
+    rectMode(CORNERS);
+    rect(740, 440, 340,240);
+    drawBoarders();
+    fill(#B43535);
+    textSize(100);
+    text("PLAY", 440,380);
   }
   if (playingGame) {
     drawBoarders();
@@ -56,7 +69,20 @@ void draw() {
       gameOver=true;
     }
   }
-  
+  if(gameOver){
+    fill(255);
+    textSize(50);
+    text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
+    fill(255);
+    stroke(200);
+    strokeWeight(5);
+    rectMode(CORNERS);
+    rect(740, 440, 340,240);
+    imageMode(CENTER);
+    refresh.resize(200,200);
+    image(refresh,540,340);
+    drawBoarders();
+  }
 }
 //Method to create dotted line boarded on either side of the screen
 void drawBoarders() {
@@ -112,5 +138,18 @@ void keyReleased() {
   }
   if (keyCode==LEFT) {
     c.left=false;
+  }
+}
+//7,4,3,2
+void mousePressed(){
+  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&newGame){
+    newGame=false;
+    playingGame=true;
+  }
+  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&gameOver){
+    gameOver=false;
+    playingGame=true;
+    gHit=0;
+    timer=60;
   }
 }
