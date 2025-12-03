@@ -20,7 +20,7 @@ class Monster {
   }
 
   void move() {
-    int shouldChange = (int)random(1, 5);
+    int shouldChange = (int)random(1, 10);
     if (shouldChange==3) {
       direction = (int)random(1, 4);
     }
