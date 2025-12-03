@@ -2,6 +2,9 @@ PImage car;
 PImage ghost;
 PImage groundTile;
 Car c;
+Monster m1,m2;
+boolean newGame=true;
+boolean gameOver=false;
 
 void setup() {
   size(1080, 720);
@@ -13,6 +16,8 @@ void setup() {
     groundTile = loadImage("dirt_pattern.jpg");
   }
   c= new Car();
+  m1=new Monster();
+  m2 = new Monster();
 }
 
 void draw() {
@@ -25,7 +30,10 @@ void draw() {
   }
   drawBoarders();
   c.drawCar();
-  
+  m1.drawGhost();
+  m2.drawGhost();
+  m1.checkCollision(c);
+  m2.checkCollision(c);
 }
 //Method to create dotted line boarded on either side of the screen
 void drawBoarders(){

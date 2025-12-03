@@ -1,8 +1,8 @@
 class Car{
-  PVector position = new PVector(200,200);
+  PVector position = new PVector(width/2,3*(height/4));
   PVector velocity = new PVector(0,0);
   boolean left,right,forward,back=false;
-  float steering=0;
+  float steering=-1.6;
   float thrust=0;
   boolean blocked =false;
   
