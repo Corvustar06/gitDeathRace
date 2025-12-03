@@ -1,6 +1,8 @@
 class Car{
   PVector position = new PVector(width/2,3*(height/4));
   PVector velocity = new PVector(0,0);
+  PVector acceleration = new PVector(0,0);
+  PVector carAcceleration = new PVector(0,0);
   boolean left,right,forward,back=false;
   float steering=-1.6;
   float thrust=0;
@@ -26,10 +28,10 @@ class Car{
     
     if(forward||back){
       if(forward){
-        thrust=5;
+        thrust=0.1;
       }
       if(back){
-        thrust=-2.5;
+        thrust=-0.05;
         blocked = false;
       }
     }else{
@@ -37,8 +39,12 @@ class Car{
       velocity = new PVector (0,0);
     }
     
-    velocity = new PVector(thrust,0);
-    velocity.rotate(steering);
+    acceleration = new PVector(0,0);
+    carAcceleration = new PVector(thrust,0);
+    carAcceleration.rotate(steering);
+    acceleration.add(carAcceleration);
+    
+    velocity.add(acceleration);
     
     
     if(!blocked){
