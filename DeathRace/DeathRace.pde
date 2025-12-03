@@ -6,6 +6,7 @@ Monster m1,m2;
 boolean newGame=true;
 boolean gameOver=false;
 ArrayList<Gravestone> graves = new ArrayList<Gravestone>(0);
+int gHit=0;
 
 void setup() {
   size(1080, 720);

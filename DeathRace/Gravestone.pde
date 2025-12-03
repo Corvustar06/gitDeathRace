@@ -8,4 +8,8 @@ class Gravestone{
     noStroke();
     rect(position.x-10,position.y-20,position.x+10,position.y+20);
   }
+  
+  void checkCollision(Car c){
+    
+  }
 }

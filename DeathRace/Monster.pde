@@ -16,22 +16,31 @@ class Monster {
       graves.add(new Gravestone(position.x, position.y));
       position = new PVector(random(0, 100), random(0, height));
       c.blocked=true;
+      gHit++;
     }
   }
 
   void move() {
-    int shouldChange = (int)random(1, 20);
+    int shouldChange = (int)random(1, 40);
     if (shouldChange==3) {
       direction = (int)random(0, 5);
     }
     if (direction==1) {
-      position.y-=velocity;
+      if (position.y-velocity>20) {
+        position.y-=velocity;
+      }
     } else if (direction==2) {
-      position.x+=velocity;
+      if (position.x+velocity<width-16) {
+        position.x+=velocity;
+      }
     } else if (direction==3) {
-      position.y+=velocity;
+      if (position.y+velocity<height-20) {
+        position.y+=velocity;
+      }
     } else if (direction==4) {
-      position.x-=velocity;
+      if (position.x-velocity>16) {
+        position.x-=velocity;
+      }
     }
   }
 }
