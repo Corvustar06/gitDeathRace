@@ -23,6 +23,7 @@ void draw() {
       image(groundTile, i, j);
     }
   }
+  drawBoarders();
   c.drawCar();
   
 }
@@ -54,10 +55,10 @@ void drawBoarders(){
 }
 
 void keyPressed(){
-  if(keyCode=='w'){
+  if(keyCode==UP){
     c.forward=true;
   }
-  if(keyCode=='s'){
+  if(keyCode==DOWN){
     c.back=true;
   }
   if(keyCode==RIGHT){
@@ -69,11 +70,11 @@ void keyPressed(){
 }
 
 void keyReleased(){
-   if(keyCode=='w'){
+   if(keyCode==UP){
     c.forward=false;
   }
   if(keyCode==DOWN){
-    c.back=false
+    c.back=false;
   }
   if(keyCode==RIGHT){
     c.right=false;

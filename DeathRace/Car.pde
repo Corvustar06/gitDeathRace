@@ -1,20 +1,48 @@
 class Car{
-  PVector position = new PVector(100,100);
-  PVector acceleration= new PVector(0,0);
+  PVector position = new PVector(200,200);
   PVector velocity = new PVector(0,0);
   boolean left,right,forward,back=false;
-  float steering=0.5;
+  float steering=0;
+  float thrust=0;
+  boolean blocked =false;
   
   void drawCar(){
-    if(forward){
-      acceleration = new PVector(1,0);
-    }else{
-      acceleration = new PVector(0,0);
+    
+    if(position.x<=115||position.x>=965){
+      blocked=true;
     }
-    if(back){
-      acceleration = new PVector(-1,0);
+    if(position.y>height){
+      position.y=0;
+    } else if(position.y<0){
+      position.y=height;
+    }
+    
+    if(position.x>width){
+      position.x=0;
+    }
+    else if(position.x<0){
+      position.x=width;
+    }
+    
+    if(forward||back){
+      if(forward){
+        thrust=5;
+      }
+      if(back){
+        thrust=-2.5;
+        blocked = false;
+      }
     }else{
-      acceleration = new PVector(0,0);
+      thrust=0;
+      velocity = new PVector (0,0);
+    }
+    
+    velocity = new PVector(thrust,0);
+    velocity.rotate(steering);
+    
+    
+    if(!blocked){
+      position.add(velocity);
     }
     
     if(left==true){
