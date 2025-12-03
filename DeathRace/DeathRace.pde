@@ -1,6 +1,7 @@
 PImage car;
 PImage ghost;
 PImage groundTile;
+Car c;
 
 void setup() {
   size(1080, 720);
@@ -11,6 +12,7 @@ void setup() {
   for (int i=0; i<100; i++) {
     groundTile = loadImage("dirt_pattern.jpg");
   }
+  c= new Car();
 }
 
 void draw() {
@@ -21,10 +23,8 @@ void draw() {
       image(groundTile, i, j);
     }
   }
+  c.drawCar();
   
-  imageMode(CENTER);
-  car.resize(77,30);
-  image(car,width/2, height/2);
 }
 //Method to create dotted line boarded on either side of the screen
 void drawBoarders(){
@@ -55,11 +55,30 @@ void drawBoarders(){
 
 void keyPressed(){
   if(keyCode=='w'){
+    c.forward=true;
   }
   if(keyCode=='s'){
+    c.back=true;
   }
-  if(keyCode=='d'){
+  if(keyCode==RIGHT){
+    c.right=true;
   }
-  if(keyCode=='a'){
+  if(keyCode==LEFT){
+    c.left=true;
+  }
+}
+
+void keyReleased(){
+   if(keyCode=='w'){
+    c.forward=false;
+  }
+  if(keyCode==DOWN){
+    c.back=false
+  }
+  if(keyCode==RIGHT){
+    c.right=false;
+  }
+  if(keyCode==LEFT){
+    c.left=false;
   }
 }
