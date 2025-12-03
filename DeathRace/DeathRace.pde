@@ -5,6 +5,7 @@ Car c;
 Monster m1,m2;
 boolean newGame=true;
 boolean gameOver=false;
+ArrayList<Gravestone> graves = new ArrayList<Gravestone>(0);
 
 void setup() {
   size(1080, 720);
@@ -18,6 +19,7 @@ void setup() {
   c= new Car();
   m1=new Monster();
   m2 = new Monster();
+  
 }
 
 void draw() {
@@ -34,6 +36,11 @@ void draw() {
   m2.drawGhost();
   m1.checkCollision(c);
   m2.checkCollision(c);
+  if(graves.size()>0){
+  for(Gravestone g:graves){
+    g.drawGrave();
+  }
+  }
 }
 //Method to create dotted line boarded on either side of the screen
 void drawBoarders(){
