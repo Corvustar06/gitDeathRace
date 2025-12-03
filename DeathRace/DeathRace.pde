@@ -29,22 +29,22 @@ void setup() {
 
 void draw() {
   //Draws a repeated pattern of tiled ground background
-  for (int i =0; i<width; i+=360) {
-    for (int j=0; j<height; j+=360) {
-      groundTile.resize(360,360);//resizes the tiles to a more appropriate size
+  for (int i =0; i<width+360; i+=360) {
+    for (int j=0; j<height+360; j+=360) {
+      groundTile.resize(360, 360);//resizes the tiles to a more appropriate size
       image(groundTile, i, j);
     }
   }
-  if(newGame==true){
+  if (newGame==true) {
     fill(255);
     stroke(200);
     strokeWeight(5);
     rectMode(CORNERS);
-    rect(740, 440, 340,240);
+    rect(740, 440, 340, 240);
     drawBoarders();
     fill(#B43535);
     textSize(100);
-    text("PLAY", 440,380);
+    text("PLAY", 440, 380);
   }
   if (playingGame) {
     drawBoarders();
@@ -59,28 +59,30 @@ void draw() {
         g.checkCollision(c);
       }
     }
-    
+
     timer-=0.016;
     fill(255);
     textSize(50);
-    text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
-    if(timer<=0){
+    //Shows the player their score and what time they have left to earn more
+    //points. nf fuction is for number formating, so that there are only 2 decimal places shown
+    text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2), 200, 100);
+    if (timer<=0) {
       playingGame=false;
       gameOver=true;
     }
   }
-  if(gameOver){
+  if (gameOver) {
     fill(255);
     textSize(50);
-    text("Score: "+gHit+"          Time left: "+nf(timer,2,2),200,100);
+    text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2), 200, 100);
     fill(255);
     stroke(200);
     strokeWeight(5);
     rectMode(CORNERS);
-    rect(740, 440, 340,240);
+    rect(740, 440, 340, 240);
     imageMode(CENTER);
-    refresh.resize(200,200);
-    image(refresh,540,340);
+    refresh.resize(200, 200);
+    image(refresh, 540, 340);
     drawBoarders();
   }
 }
@@ -141,12 +143,12 @@ void keyReleased() {
   }
 }
 //7,4,3,2
-void mousePressed(){
-  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&newGame){
+void mousePressed() {
+  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&newGame) {
     newGame=false;
     playingGame=true;
   }
-  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&gameOver){
+  if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&gameOver) {
     gameOver=false;
     playingGame=true;
     gHit=0;
