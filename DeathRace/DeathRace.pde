@@ -4,50 +4,69 @@ PImage groundTile;
 PImage refresh;
 Car c;
 Monster m1, m2;
+//boolean game states
 boolean newGame=true;
 boolean playingGame = false;
 boolean gameOver=false;
+//unlimited number of potential grave objects
 ArrayList<Gravestone> graves = new ArrayList<Gravestone>(0);
+//ghosts hit
 int gHit=0;
+//game's countdown
 float timer =60.0;
 
 void setup() {
   size(1080, 720);
   background(150);
 
+//loading my image assets
   car = loadImage("car.png");
   ghost = loadImage("ghost.png");
   for (int i=0; i<100; i++) {
     groundTile = loadImage("dirt_pattern.jpg");
   }
   refresh = loadImage("refresh.png");
+  
+  //creating my car and ghost objects
   c= new Car();
   m1=new Monster();
   m2 = new Monster();
+  
+  //setting the framerate to ensure a controlled timer
   frameRate = 60;
 }
 
 void draw() {
-  //Draws a repeated pattern of tiled ground background
+  //Draws a repeated pattern of tiled ground background with extra layer
   for (int i =0; i<width+360; i+=360) {
     for (int j=0; j<height+360; j+=360) {
-      groundTile.resize(360, 360);//resizes the tiles to a more appropriate size
+      //resizes the tiles to a more appropriate size considering aspect ration
+      groundTile.resize(360, 360);
       image(groundTile, i, j);
     }
   }
+  
+  //very beginning game state
   if (newGame==true) {
+    //make a nice looking box for the start button
     fill(255);
     stroke(200);
     strokeWeight(5);
     rectMode(CORNERS);
     rect(740, 440, 340, 240);
+    //add the dashed boarder lines
     drawBoarders();
+    //create a play game prompt for the user
     fill(#B43535);
     textSize(100);
     text("PLAY", 440, 380);
   }
+  
+  //playing game state
   if (playingGame) {
+    //Add the map boarders as a visual cue to the player
     drawBoarders();
+    //draw the different objects and check for collisions between the car and others
     c.drawCar();
     m1.drawGhost();
     m2.drawGhost();
@@ -60,26 +79,34 @@ void draw() {
       }
     }
 
+//the timer decreases by 1/60 of a second
     timer-=0.016;
     fill(255);
     textSize(50);
     //Shows the player their score and what time they have left to earn more
     //points. nf fuction is for number formating, so that there are only 2 decimal places shown
     text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2), 200, 100);
+    //When the timer runs out, the game ends
     if (timer<=0) {
       playingGame=false;
       gameOver=true;
     }
   }
+  //Game finished play state
   if (gameOver) {
+    //show the player what their final time was by the end of playing
+    //reset the timer so it doesn't show -0.01s
+    timer=0;
     fill(255);
     textSize(50);
-    text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2), 200, 100);
+    text("Score: "+gHit+"          Time left: "+nf(timer, 2, 2)+"s", 200, 100);
+    //create a visually appealing restart game button with refresh icon
     fill(255);
     stroke(200);
     strokeWeight(5);
     rectMode(CORNERS);
     rect(740, 440, 340, 240);
+    //make sure the image is where I want it to be
     imageMode(CENTER);
     refresh.resize(200, 200);
     image(refresh, 540, 340);
@@ -113,6 +140,7 @@ void drawBoarders() {
   rect(980, 648, 965, 720);
 }
 
+//checks which keys are pressed and allows for car movement
 void keyPressed() {
   if (keyCode==UP) {
     c.forward=true;
@@ -128,6 +156,7 @@ void keyPressed() {
   }
 }
 
+//stops the movement when the key is let go of
 void keyReleased() {
   if (keyCode==UP) {
     c.forward=false;
@@ -142,13 +171,16 @@ void keyReleased() {
     c.left=false;
   }
 }
-//7,4,3,2
+//checks that the mouse is over the button and that the player is in the appropriate
+//game state to trigger the right response
 void mousePressed() {
   if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&newGame) {
+    //simply begins the game by switching the game state
     newGame=false;
     playingGame=true;
   }
   if ((mouseX<740&&mouseX>340)&&(mouseY>240&&mouseY<440)&&gameOver) {
+    //switches the game state and resets the score, timer, grave count, and car position
     gameOver=false;
     playingGame=true;
     gHit=0;
